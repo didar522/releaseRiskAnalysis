@@ -27,7 +27,6 @@ public class WeekRateCalc {
 	String fileName; 
 	String outputFileName; 
 	String outputSheetName;
-	String outputLastValFileName;
 	ArrayList<WeekCalcTemplate> weekRateData; 
 	ArrayList<DataIssueTemplate> tempIssueData = new ArrayList<DataIssueTemplate>();
 	boolean fileCreate; 
@@ -45,7 +44,6 @@ public class WeekRateCalc {
 			ArrayList<WeekCalcTemplate> tmpweekRateData, 
 			boolean tmpFileCreate, 
 			boolean tmp_boolCalculationTypeisRate, 
-			String temp_outputLastValFileName, 
 			boolean temp_booloutputLastValFileCreate
 	){
 		
@@ -57,7 +55,6 @@ public class WeekRateCalc {
 		this.fileCreate = tmpFileCreate;
 		this.boolCalculationTypeisRate = tmp_boolCalculationTypeisRate;
 		this.outputSheetName = tmpOutputSheetName; 
-		this.outputLastValFileName = temp_outputLastValFileName;
 		this.booloutputLastValFileCreate = temp_booloutputLastValFileCreate; 
 	}
 	
@@ -153,25 +150,9 @@ public class WeekRateCalc {
 			}
 		}
 		
+	}
 		
-//		---------------for debugging purpose only ------------ 
-//		for (int i=0;i<weekRateData.size();i++){
-//			System.out.print(DateFormat.getDateInstance(DateFormat.SHORT).format(weekRateData.get(i).getWeekStart())+" --- ");
-//			System.out.print(DateFormat.getDateInstance(DateFormat.SHORT).format(weekRateData.get(i).getWeekEnd()) +" --- ");
-//			System.out.print(weekRateData.get(i).inOinC+" --- ");
-//			System.out.print(weekRateData.get(i).erOinC+" --- ");
-//			System.out.print(weekRateData.get(i).inOltC+" --- ");
-//			System.out.print(weekRateData.get(i).erOltC+" --- ");
-//			System.out.print(weekRateData.get(i).inO+" --- ");
-//			System.out.print(weekRateData.get(i).erO+" --- ");
-//			System.out.print(weekRateData.get(i).totalVal+" --- ");
-//			System.out.println();
-//		}
-		
-		
-		
-		// ---------------- for calculating normal values out of the total values achieved in this process.  
-		//calcNormalval (weekRateData);
+		public void exportWeeklyDataExcel (){
 		
 		
 		//================================ Info: Output for weekly rates per attribute ===================================
@@ -313,20 +294,6 @@ public class WeekRateCalc {
 			System.out.println("Error: writing "+ outputFileName);
 		}
 		
-		//================================ Info: Output for weekly rates per attribute ===================================
-		
-//		---------------for debugging purpose only ------------ 
-		
-//		for (DataReleaseCategoryTemplate counter_objDataReleaseCategoryTemplate: objDataReleaseCategoryTemplate){
-//			System.out.println(counter_objDataReleaseCategoryTemplate.getIntReleaseNum());
-//			System.out.println(counter_objDataReleaseCategoryTemplate.getStrReleaseName());
-//			System.out.println(counter_objDataReleaseCategoryTemplate.getDblReleaseAttLastValRecorded());
-//			System.out.println(counter_objDataReleaseCategoryTemplate.getDblReleaseAttLastOpenRecorded());
-//			System.out.println(counter_objDataReleaseCategoryTemplate.getIntReleaseAttRankFound());
-//			System.out.println("============================");
-//		}
-		
-//		---------------for debugging purpose only ------------ 
 		
 	}// end of weekly rate method. 
 	

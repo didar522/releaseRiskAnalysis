@@ -37,15 +37,6 @@ public class DataIssueTemplate {
 	private String strProcessedText; 
 	
 	
-	public ArrayList <issueTopicInfo> alIssueTopicInfo = new ArrayList <issueTopicInfo> (); 
-	public issueTopicInfo maxSimilarTopicInfo = new issueTopicInfo();
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * @return the strProject
 	 */

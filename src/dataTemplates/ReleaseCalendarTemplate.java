@@ -7,6 +7,7 @@ public class ReleaseCalendarTemplate {
 	private Date dateReleasEnd; 
 	private String strCategoryofRelease; //High, Medium, Low (Satisfaction of a release)
 	private double dblTotalDurationofRelease; 
+	private String releaseName; 
 	
 	
 	
@@ -47,6 +48,12 @@ public class ReleaseCalendarTemplate {
 	 */
 	public void setDblTotalDurationofRelease(double dblTotalDurationofRelease) {
 		this.dblTotalDurationofRelease = dblTotalDurationofRelease;
+	}
+	public String getReleaseName() {
+		return releaseName;
+	}
+	public void setReleaseName(String releaseName) {
+		this.releaseName = releaseName;
 	}
 	
 	
