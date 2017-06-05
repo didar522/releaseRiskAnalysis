@@ -79,7 +79,8 @@ public class mainReleaseRiskAnalysis {
 		
 		directFtrBugDifferentiate (); 
 		getWeeklyRateData (); 
-				
+		printCSVFiles (); 
+		printGraphs(); 
 	}
 	
 	
@@ -151,25 +152,46 @@ public class mainReleaseRiskAnalysis {
 		outputSheetName = "BFR"; 
 		WeekRateCalc objWeekRateCalc_BFR = new WeekRateCalc (strFilePath, strFileName, outputFileName, outputSheetName, bugIssueData, weekRateData_BFR, true, true, true); 
 		objWeekRateCalc_BFR.weeklyRateCalc();
+		objWeekRateCalc_BFR.exportWeeklyDataExcel();
+		
 		
 		outputFileName = "WeeklyRate_DFR.xls";
 		outputSheetName = "DFR"; 
 		WeekRateCalc objWeekRateCalc_DFR = new WeekRateCalc (strFilePath, strFileName, outputFileName, outputSheetName, bugIssueData, weekRateData_DFR, true, false, false); 
 		objWeekRateCalc_DFR.weeklyRateCalc();
+		objWeekRateCalc_DFR.exportWeeklyDataExcel();
 		
 		outputFileName = "WeeklyRate_FCR.xls";
 		outputSheetName = "FCR"; 
 		WeekRateCalc objWeekRateCalc_FCR = new WeekRateCalc (strFilePath, strFileName, outputFileName, outputSheetName, ftrIssueData, weekRateData_FCR, true, true, false); 
 		objWeekRateCalc_FCR.weeklyRateCalc();
+		objWeekRateCalc_FCR.exportWeeklyDataExcel();
 		
 		outputFileName = "WeeklyRate_FOR.xls";
 		outputSheetName = "FOR"; 
 		WeekRateCalc objWeekRateCalc_FOR = new WeekRateCalc (strFilePath, strFileName, outputFileName, outputSheetName, ftrIssueData, weekRateData_FOR, true, false, false); 
 		objWeekRateCalc_FOR.weeklyRateCalc();
+		objWeekRateCalc_FOR.exportWeeklyDataExcel();
 		
 	}
 	
-	graphBugFtr obj_graphBugFtr = new graphBugFtr(weekRateData_BFR, weekRateData_FCR, weekRateData_Commit, releaseInfo, strFilePath); 
+	public static void printCSVFiles (){
+		graphBugFtr obj_graphBugFtr = new graphBugFtr(weekRateData_BFR, weekRateData_FCR, weekRateData_Commit, releaseInfo, strFilePath); 
+		obj_graphBugFtr.performCalculation();
+		obj_graphBugFtr.printRelDuration();
+		obj_graphBugFtr.printTotalBugs();
+		obj_graphBugFtr.printBugsIn7Days();
+		obj_graphBugFtr.printBugFtrRatio();
+		
+	}
+	
+	public static void printGraphs(){
+		
+		graphBugFtr obj_graphBugFtr = new graphBugFtr(weekRateData_BFR, weekRateData_FCR, weekRateData_Commit, releaseInfo, strFilePath); 
+		obj_graphBugFtr.pythonGraphCreation (); 
+	}
+	
+	
 	
 	
 	

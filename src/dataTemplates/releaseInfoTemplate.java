@@ -8,6 +8,8 @@ public class releaseInfoTemplate {
 	public String releaseName; 
 	public int bugs_reported;
 	public int ftr_reported;
+	public int bugs_resolved;
+	public int ftr_resolved;
 	public int bugsSevenDays; 
 	public int ftrSevenDays;
 	public double releaseDuration; 
@@ -15,6 +17,8 @@ public class releaseInfoTemplate {
 	public int addLoc; 
 	public int delLoc; 
 	public int totalLoc; 
+	
+ 
 	
 	public Date dateReleasEnd; 
 	public String strQualityCategoryofRelease; //High, Medium, Low (Satisfaction of a release)

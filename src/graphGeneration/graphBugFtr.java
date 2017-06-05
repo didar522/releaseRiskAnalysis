@@ -61,6 +61,18 @@ public class graphBugFtr {
 		}
 			
 		for (WeekCalcTemplate iterator:weekRateData_BFR){
+			if(iterator.releaseDuration == iterator.releaseCompletion){
+				al_releaseInfoTemplate.get(iterator.getReleaseNum()).bugs_resolved = (iterator.erOinC+iterator.inOinC); 
+			}
+		}	
+			
+		for (WeekCalcTemplate iterator:weekRateData_FCR){
+			if(iterator.releaseDuration == iterator.releaseCompletion){
+				al_releaseInfoTemplate.get(iterator.getReleaseNum()).ftr_resolved = (iterator.erOinC+iterator.inOinC);
+			}
+		}
+		
+		for (WeekCalcTemplate iterator:weekRateData_BFR){
 			if(iterator.releaseDuration>=7){
 				if(iterator.releaseCompletion==7){
 					al_releaseInfoTemplate.get(iterator.getReleaseNum()).bugsSevenDays = (iterator.inO+iterator.inOinC+iterator.inOltC);
@@ -84,14 +96,151 @@ public class graphBugFtr {
 	}		
 			
 			
+	public void printBugsIn7Days (){
+		try{	
+			
+			File printdest = new File(strFilePath+"/BugsIn7Days.csv");
+			BufferedWriter out = new BufferedWriter(new FileWriter(printdest));
+			
+			out.write("Release number"+","+"Bugs reported in 7 days");
+			out.newLine();
+			
+			for (int i=0;i<(al_releaseInfoTemplate.size()-1);i++){
+				out.write(al_releaseInfoTemplate.get(i).releaseNum+","+al_releaseInfoTemplate.get(i+1).bugsSevenDays);
+				out.newLine();
+			}
+			
+			out.close(); 
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+	}		
+			
+	public void printTotalBugs (){
+		try{	
+			
+			File printdest = new File(strFilePath+"/TotalBugs.csv");
+			BufferedWriter out = new BufferedWriter(new FileWriter(printdest));
+			
+			out.write("Release number"+","+"Bugs reported");
+			out.newLine();
+			
+			for (int i=0;i<(al_releaseInfoTemplate.size()-1);i++){
+				out.write(al_releaseInfoTemplate.get(i).releaseNum+","+al_releaseInfoTemplate.get(i+1).bugs_reported);
+				out.newLine();
+			}
+			
+			out.close(); 
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+	}				
 			
 			
+	public void printBugFtrRatio (){
+		try{	
 			
+			File printdest = new File(strFilePath+"/BugFtrRatio.csv");
+			BufferedWriter out = new BufferedWriter(new FileWriter(printdest));
 			
+			System.out.println("for test purpose");
 			
+			out.write("Release number"+","+"Bugs resolved"+","+"Ftr resolved");
+			out.newLine();
+			
+			for (int i=0;i<(al_releaseInfoTemplate.size()-1);i++){
+				
+//					System.out.println(al_releaseInfoTemplate.get(i).bugs_resolved+" "+al_releaseInfoTemplate.get(i).ftr_resolved );
+					out.write(al_releaseInfoTemplate.get(i).releaseNum+","+al_releaseInfoTemplate.get(i).bugs_resolved+","+al_releaseInfoTemplate.get(i).ftr_resolved);
+					out.newLine();
+			}
+			
+			out.close(); 
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+	}			
+	
+	
+	public void printRelDuration(){
+		try{	
+			
+			File printdest = new File(strFilePath+"/RelDuration.csv");
+			BufferedWriter out = new BufferedWriter(new FileWriter(printdest));
+			
+			out.write("Release number"+","+"Release duration");
+			out.newLine();
+			
+			for (int i=0;i<(al_releaseInfoTemplate.size()-1);i++){
+				
+				out.write(al_releaseInfoTemplate.get(i).releaseNum+","+al_releaseInfoTemplate.get(i).releaseDuration);
+				out.newLine();
+			}
+			
+			out.close(); 
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+	}			
+	
+	
+public static void pythonGraphCreation (){
 		
-	
-	
+		
+		try {
+			
+			String pythonCodePath = System.getProperty("user.dir")+ "/src/resources/pythonCodes/"; 
+			String command = "";
+			
+			command = "py " + pythonCodePath + "TotalBugs.py";
+			Runtime.getRuntime().exec(command);
+			
+			command = "py " + pythonCodePath + "BugsIn7Days.py";
+			Runtime.getRuntime().exec(command);
+			
+			command = "py " + pythonCodePath + "RelDuration.py";
+			Runtime.getRuntime().exec(command);
+			
+			command = "py " + pythonCodePath + "BugFtrRatio.py";
+			Runtime.getRuntime().exec(command);
+			
+			
+//			String pythonCodePath = System.getProperty("user.dir")+ "/src/main/java/resources/pythonCodes/"; 
+////			String command = "";
+////			command = "python " + pythonCodePath + "barchart.py";
+////			
+////			System.out.println(command);
+//			Runtime.getRuntime().exec("cd "+pythonCodePath);
+//			Runtime.getRuntime().exec("python barchart.py");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("problem");
+		}
+		
+		System.out.println("done");
+}
 	
 	
 	
@@ -122,33 +271,33 @@ public class graphBugFtr {
 	}
 	
 	
-	public static void pythonGraphCreation (){
+	public static void pythonGraphCreationBUP (){
 		
 		
-		try {
-			
-			String pythonCodePath = System.getProperty("user.dir")+ "/src/main/java/resources/pythonCodes/"; 
-			String command = "";
-			command = "py " + pythonCodePath + "barchart.py";
-//			System.out.println(command);
-			Runtime.getRuntime().exec(command);
-			
-			
-			
-//			String pythonCodePath = System.getProperty("user.dir")+ "/src/main/java/resources/pythonCodes/"; 
-////			String command = "";
-////			command = "python " + pythonCodePath + "barchart.py";
-////			
+//		try {
+//			
+//			String pythonCodePath = System.getProperty("user.dir")+ "/src/resources/pythonCodes/"; 
+//			String command = "";
+//			command = "py " + pythonCodePath + "barchart.py";
 ////			System.out.println(command);
-//			Runtime.getRuntime().exec("cd "+pythonCodePath);
-//			Runtime.getRuntime().exec("python barchart.py");
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("problem");
-		}
-		
+//			Runtime.getRuntime().exec(command);
+//			
+//			
+//			
+////			String pythonCodePath = System.getProperty("user.dir")+ "/src/main/java/resources/pythonCodes/"; 
+//////			String command = "";
+//////			command = "python " + pythonCodePath + "barchart.py";
+//////			
+//////			System.out.println(command);
+////			Runtime.getRuntime().exec("cd "+pythonCodePath);
+////			Runtime.getRuntime().exec("python barchart.py");
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.out.println("problem");
+//		}
+//		
 //		System.out.println("done");
 }
 	
